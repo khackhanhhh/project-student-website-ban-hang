@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    container_name: web_ban_hang_frontend
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules     # Keep node_modules exist in /frontend folder from overwriting from host machine
+    ports:
+      - '3000:3000'
+    networks:
+      - web_ban_hang_net
+    restart: always
+
+  backend:
+    build:
+      context: ./backend
+    container_name: web_ban_hang_backend
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules     # Keep node_modules exist in /backend folder from overwriting from host machine
+    ports:
+      - '5000:5000'
+    networks:
+      - web_ban_hang_net
+    restart: always
+
+networks:
+  web_ban_hang_net:
